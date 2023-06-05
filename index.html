@@ -1,93 +1,301 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>수학여행 정보</title>
-    <style>
-        body {
-            font-family: '맑은 고딕', Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-        }
-        
-        h1 {
-            color: #337ab7;
-            text-align: center;
-        }
-        
-        h2 {
-            color: #333;
-            margin-top: 30px;
-        }
-        
-        p {
-            margin-bottom: 10px;
-        }
-        
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin-left: 20px;
-        }
-        
-        li {
-            margin-bottom: 10px;
-        }
-        
-        a {
-            color: #337ab7;
-            text-decoration: none;
-        }
-        
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .photo-link {
-            display: inline-block;
-            text-align: left;
-            margin-top: 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Website</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-weight: 300;
+      font-family: 'Raleway', sans-serif;
+      background: #fff;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 80%, rgba(0, 0, 0, 0.15) 100%);
+      overflow: hidden;
+      transform-style: preserve-3d;
+    }
 
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #888;
-        }
-    </style>
+    input[type='radio'],
+    .hide {
+      display: none;
+    }
+
+    input[type='radio']:checked+section {
+      top: 0;
+    }
+
+    .container {
+      width: 100%;
+      height: 100vh;
+      transition: all 500ms;
+      transform-style: preserve-3d;
+    }
+
+    .container section {
+      position: absolute;
+      top: 100vh;
+      width: 100%;
+      height: 100vh;
+      transition: top 500ms;
+      transform-style: preserve-3d;
+    }
+
+    .container section.home {
+      background: #2196F3;
+    }
+
+    .container section.about {
+      background: #FFC107;
+    }
+
+    .container section.work {
+      background: #4CAF50;
+    }
+
+    .container section.contact {
+      background: #F44336;
+    }
+
+    .container section h1 {
+      margin: 0;
+      font-size: 64px;
+      transform: translate(0, 40vh);
+      text-align: center;
+      color: rgba(255, 255, 255, 0.85);
+      transition: transform 500ms;
+      transform-style: preserve-3d;
+    }
+
+    .container section label {
+      display: block;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .menu {
+      display: block;
+      position: fixed;
+      top: 20px;
+      left: 25px;
+      z-index: 1000;
+      transform: rotate(0deg);
+      transition: all 200ms;
+      width: 35px;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .menu::before,
+    .menu::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 35px;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.25);
+      transition: all 200ms;
+    }
+
+    .menu::before {
+      top: 10px;
+    }
+
+    .menu::after {
+      top: 20px;
+    }
+
+    .menu:hover {
+      background: white;
+    }
+
+    .menu:hover::before,
+    .menu:hover::after {
+      background: white;
+    }
+
+    .menu div,
+    .menu div label:nth-child(1) {
+      display: block;
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      top: -6px;
+    }
+
+    .menu div label:nth-child(2) {
+      display: none;
+    }
+
+    #menu:checked+.container {
+      transform: scale(0.65) translateY(-18%);
+      transition: all 500ms;
+      transform-style: preserve-3d;
+    }
+
+    #menu:checked+.container section {
+      cursor: pointer;
+      overflow: hidden;
+      opacity: 1;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+      transform-style: preserve-3d;
+    }
+
+    #menu:checked+.container section h1 {
+      transform: scale(0.5);
+      transform-style: preserve-3d;
+    }
+
+    #menu:checked+.container+.menu {
+      top: 30px;
+      left: 20px;
+      transform: rotate(225deg);
+      transition: all 200ms;
+      transform-origin: center center;
+      background: #646464;
+    }
+
+    #menu:checked+.container+.menu::before,
+    #menu:checked+.container+.menu::after {
+      background: #646464;
+      transition: all 200ms;
+    }
+
+    #menu:checked+.container+.menu::before {
+      opacity: 0;
+      transition: opacity 0s;
+    }
+
+    #menu:checked+.container+.menu::after {
+      margin-top: -20px;
+      transform: rotate(90deg);
+    }
+
+    #menu:checked+.container+.menu div label:nth-child(2) {
+      display: block;
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      top: -6px;
+    }
+
+    #menu:checked+.container+.menu div label:nth-child(1) {
+      display: none;
+    }
+
+    .container section.home {
+      z-index: 99;
+    }
+
+    .container section.about {
+      z-index: 98;
+    }
+
+    .container section.work {
+      z-index: 97;
+    }
+
+    .container section.contact {
+      z-index: 96;
+    }
+
+    #menu:checked+.container section.home {
+      top: 192px;
+    }
+
+    #menu:checked+.container section.home:hover {
+      top: 188px;
+    }
+
+    #menu:checked+.container section.about {
+      top: 132px;
+    }
+
+    #menu:checked+.container section.about:hover {
+      top: 128px;
+    }
+
+    #menu:checked+.container section.work {
+      top: 72px;
+    }
+
+    #menu:checked+.container section.work:hover {
+      top: 68px;
+    }
+
+    #menu:checked+.container section.contact {
+      top: 12px;
+    }
+
+    #menu:checked+.container section.contact:hover {
+      top: 8px;
+    }
+
+    /* Additional Styles */
+    .container section ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .container section ul li {
+      margin-bottom: 16px;
+    }
+
+    .container section ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .container section ul li a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <h1>수학여행 일정</h1>
-        <p>수학여행 일정은 다음과 같습니다:</p>
-        <ul>
-            <li>날짜 1: XX월 XX일 - 어디</li>
-            <li>날짜 2: XX월 XX일 - 어디</li>
-            <li>날짜 3: XX월 XX일 - 어디</li>
-            <!-- 일정을 계속 추가할 수 있습니다. -->
-        </ul>
 
-        <h2>선생님 전화번호</h2>
-        <p>아래는 수학여행과 관련된 선생님들의 전화번호입니다:</p>
-        <ul>
+<body>
+  <form>
+    <input type="radio" name="tab" id="menu">
+    <div class="container">
+      <input type="radio" name="tab" checked id="home">
+      <section class="home">
+        <h1>Home</h1>
+        <label for="home"></label>
+      </section>
+      <input type="radio" name="tab" id="about">
+      <section class="about">
+        <h1>About</h1>
+        <label for="about"></label>
+      </section>
+      <input type="radio" name="tab" id="work">
+      <section class="work">
+        <h1>Work</h1>
+        <label for="work"></label>
+      </section>
+      <input type="radio" name="tab" id="contact">
+      <section class="contact">
+        <h1>연락처</h1>
+        <div style="text-align: center; color: white;">
+          <p>다음은 수학여행에 관련된 선생님들의 전화번호입니다.</p>
+          <ul>
             <li><a href="tel:010-1234-5678">선생님 1: 010-1234-5678</a></li>
             <li><a href="tel:010-9876-5432">선생님 2: 010-9876-5432</a></li>
             <!-- 선생님 전화번호를 계속 추가할 수 있습니다. -->
-        </ul>
+          </ul>
+        </div>
+        <label for="contact"></label>
+      </section>
+    </div>
+    <div class="menu">
+      <div>
+        <label for="menu"></label>
+        <label for="home"></label>
+      </div>
+    </div>
+  </form>
 
-        <h2>사진 콘테스트</h2>
-        <p>학생들이 사진을 올릴 수 있는 공간입니다:</p>
-        <p class="photo-link"><a href="https://drive.google.com/drive/folders/1TFOHC17XxRA9F13jU7X-D4ahxTIMt90a?usp=sharing">여기를 클릭하여 사진을 업로드해주세요</a></p>
-    </div>
-    
-    <div class="footer">
-        <h6>수정사항이나 애로사항 발생시, 2509 문건하에게 연락주세요</h6>
-    </div>
 </body>
+
 </html>
